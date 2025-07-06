@@ -5,7 +5,7 @@
                 <tbody></tbody>
             </table>
 </html>
- 
+
 <script>
 async function fetchAndDisplay(url, id) {
   const data = await (await fetch(url)).json();
@@ -17,3 +17,30 @@ async function fetchAndDisplay(url, id) {
  
 fetchAndDisplay('/get-piccione', 'piccione');
 </script>
+-----------------------------------------------------------------------------------
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
+public class VisitaPiccioneProprietarioDto {
+    public String diagnosi;
+
+    public VisitaPiccioneProprietarioDto(String diagnosi) {
+        this.diagnosi = diagnosi;
+    }
+}
+
+    public List<VisitaPiccioneProprietarioDto> getVisitePiccioneProprietario() {
+        return visitaRepo.getVisiteConPiccioniProprietari();
+    }
+
+
+
+public interface VisitaPiccioneProprietarioRepository extends JpaRepository<VisitaVeterinaria, Integer> {
+
+    @Query("SELECT new com.test.FelineManager.dtos.VisitaPiccioneProprietarioDto(" +
+           "v.diagnosi, g.nome) " +
+           "FROM VisitaPiccione v " +
+           "LEFT JOIN v.proprietario p ")
+    List<VisitaPiccioneProprietarioDto> getVisiteConPiccioniEProprietari();
+
+}
