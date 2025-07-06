@@ -44,3 +44,10 @@ public interface VisitaPiccioneProprietarioRepository extends JpaRepository<Visi
     List<VisitaPiccioneProprietarioDto> getVisiteConPiccioniEProprietari();
 
 }
+-----------------------------------------------------
+public List<ProprietarioDto> getproprietario(){
+        return proprietarirepository.findAll().stream().map(ProprietarioDto::new).toList();
+    }
+--------------------------------------------------------
+http://localhost:8080/get-studenti
+http://localhost:8080/index.html
