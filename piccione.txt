@@ -1,0 +1,19 @@
+<html>
+        <h2>piccione</h2>
+            <table id="piccione">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+</html>
+ 
+<script>
+async function fetchAndDisplay(url, id) {
+  const data = await (await fetch(url)).json();
+  const t = document.getElementById(id);
+  const h = Object.keys(data[0]);
+  t.innerHTML = '<thead><tr>' + h.map(k => '<th>' + k + '</th>').join('') + '</tr></thead>' +
+                '<tbody>' + data.map(r => '<tr>' + h.map(k => '<td>' + r[k] + '</td>').join('') + '</tr>').join('') + '</tbody>';
+}
+ 
+fetchAndDisplay('/get-piccione', 'piccione');
+</script>
